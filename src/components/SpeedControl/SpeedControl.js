@@ -5,17 +5,27 @@ import { connect } from 'react-redux';
 // BUTTONS SHOULD INCREASE OR DECREASE SPEED, RESPECTIVELY
 
 class SpeedControl extends Component {
-  render() {
-    return (
-      <div>
-        <h2>Speed Control</h2>
 
-        <button>Increase Speed</button>
-        <p>SPEED: GOES HERE</p>
-        <button>Decrease Speed</button>
-      </div>
-    )
-  }
+    handleClick = (dir) => {
+        if(dir === 'increase') {
+            this.props.dispatch({type: 'INCREASE_SPEED'})
+        }
+        else if (dir === 'decrease') {
+            this.props.dispatch({ type: 'DECREASE_SPEED' })
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <h2>Speed Control</h2>
+
+                <button onClick={() => this.handleClick('increase')}>Increase Speed</button>
+                <p>{this.props.reduxStore.speed}</p>
+                <button onClick={() => this.handleClick('decrease')}>Decrease Speed</button>
+            </div>
+        )
+    }
 }
 
 const mapReduxStateToProps = (reduxStore) => {
