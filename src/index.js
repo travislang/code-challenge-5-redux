@@ -17,10 +17,18 @@ const speed = (state = 0, action) => {
             return state
     }
 }
+const passengers = (state = ['Travis'], action) => {
+    switch( action.type ) {
+        case 'ADD_PASSENGER':
+            return [...state, action.payload];
+        default:
+            return state
+    }
+}
 
 // be sure to combine your reducers!
 const storeInstance = createStore(
-  combineReducers({ speed }),
+  combineReducers({ speed, passengers }),
   applyMiddleware(logger)
 )
 
